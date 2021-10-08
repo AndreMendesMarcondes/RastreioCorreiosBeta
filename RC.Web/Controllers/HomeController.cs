@@ -33,9 +33,9 @@ namespace RC.Web.Controllers
                              .Replace(" ", "")
                              .Trim();
 
-            List<RastreioCorreioDTO> lista = _correioService.Processar(codigos);
+            RastreioCorreioDTO rastreios = _correioService.Processar(codigos);
 
-            return View(lista);
+            return View(rastreios);
         }
     }
 }

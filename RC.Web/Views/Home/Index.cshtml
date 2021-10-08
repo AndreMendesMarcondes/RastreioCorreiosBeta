@@ -1,4 +1,4 @@
-﻿@model List<RC.Domain.RastreioCorreioDTO>
+﻿@model RC.Domain.RastreioCorreioDTO
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -18,13 +18,13 @@
     </div>
 </form>
 
-@if (Model != null && Model.Any())
+@if (Model != null && Model.objeto.Any())
 {
-    foreach (var encomenda in Model)
+    foreach (var encomenda in Model.objeto)
     {
-        if (encomenda != null && encomenda.objeto != null)
+        if (encomenda != null)
         {
-            await Html.RenderPartialAsync("../Shared/_ReportEncomendaCorreio", encomenda.objeto.FirstOrDefault());
+            await Html.RenderPartialAsync("../Shared/_ReportEncomendaCorreio", encomenda);
         }
     }
 }

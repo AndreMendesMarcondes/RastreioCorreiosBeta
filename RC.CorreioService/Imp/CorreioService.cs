@@ -21,17 +21,15 @@ namespace RC.CorreioService.Imp
         }
 
 
-        public List<RastreioCorreioDTO> Processar(string codigosRastreio)
+        public RastreioCorreioDTO Processar(string codigosRastreio)
         {
-            ConcurrentBag<RastreioCorreioDTO> lista = new();
+            string todosOsCodigosDeRastreio = "";
 
-            Parallel.ForEach(codigosRastreio.Split(","), codigo =>
-            {
-                RastreioCorreioDTO retorno = Get(codigo);
-                lista.Add(retorno);
-            });
+            foreach (var codigo in codigosRastreio.Split(","))
+                todosOsCodigosDeRastreio += codigo;
 
-            return lista.ToList();
+            RastreioCorreioDTO retorno = Get(todosOsCodigosDeRastreio);
+            return retorno;
         }
 
         private RastreioCorreioDTO Get(string codigoRastreio)
