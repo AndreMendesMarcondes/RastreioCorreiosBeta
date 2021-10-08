@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<RC.Domain.RastreioCorreioDTO>
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -7,7 +8,7 @@
         <div class="offset-4 form-group text-center">
             <div class="input-group text-center">
                 <div class="col-12">
-                    <h5 >Códigos de rastreamento </h5><h3>1 por linha</h3>
+                    <h5>Códigos de rastreamento </h5><h3>1 por linha</h3>
                 </div>
                 <textarea id="codigos" class="form-control" name="codigos" rows="4" cols="10"></textarea>
             </div>
@@ -16,3 +17,14 @@
         </div>
     </div>
 </form>
+
+@if (Model != null && Model.Any())
+{
+    foreach (var encomenda in Model)
+    {
+        if (encomenda != null && encomenda.objeto != null)
+        {
+            await Html.RenderPartialAsync("../Shared/_ReportEncomendaCorreio", encomenda.objeto.FirstOrDefault());
+        }
+    }
+}

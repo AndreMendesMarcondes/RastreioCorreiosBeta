@@ -1,0 +1,28 @@
+﻿@model RC.Domain.Objeto
+
+<div class="row">
+    <div class="col-12">
+        <p>
+            @if (@Model.evento.FirstOrDefault().descricao.ToLower().Contains("objeto entregue"))
+            {
+                <a class="btn btn-primary" data-toggle="collapse" href="#@Model.numero" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    @Model.numero - @Model.evento.FirstOrDefault().data - @Model.evento.FirstOrDefault().descricao
+                </a>
+            }
+            else
+            {
+                <a class="btn btn-warning" data-toggle="collapse" href="#@Model.numero" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    @Model.numero - @Model.evento.FirstOrDefault().data - @Model.evento.FirstOrDefault().descricao
+                </a>
+            }
+        </p>
+        <div class="collapse" id="@Model.numero">
+            @foreach (var evento in Model.evento.OrderByDescending(c => c.data))
+            {
+                <div class="card card-body">
+                    @evento.data - @evento.descricao
+                </div>
+            }
+        </div>
+    </div>
+</div>
